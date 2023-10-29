@@ -65,6 +65,9 @@ int TryOrCatch();
 int CatchAndTry(); //different order
 ```
 
+`Callback` is a special *verb* used for writting callback functions.  Other special words can be used
+as *verbs* as well it they are well known in program-jargon.
+
 ## Scope
 
 Scope is written as an uppercase noun followed by a single underscore.  
@@ -74,6 +77,14 @@ There can be multiple nouns, and in such cases, Pascal Case is used.  Multiple s
 Project_
 CarProject_
 CarProject_EngineModule_
+```
+
+If the item of the scope is a Define or Enum Value, then the scope is written as all caps.
+
+```
+PROJECT_MAX
+CARPROJECT_SIZE
+CARPROJECT_ENGINEMODULE_LENGTH
 ```
 
 ## File
