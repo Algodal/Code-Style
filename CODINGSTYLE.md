@@ -25,6 +25,14 @@ int ball_green; //ball is the subject
 int green_ball; //green is the subject
 ```
 
+Some words that go well together can be joined as one word instead of being separated with underscores.
+It is up to the programmer's preference.  However, it is recommended, that this is used in few cases so that
+the naming of variables remain consistent throughout the code.
+
+```
+int bigfoot; # foot_big
+```
+
 
 ## Defines and Enum Values
 
