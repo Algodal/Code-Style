@@ -138,8 +138,9 @@ and its own scripts.
 A project must be a root folder that contains everything it needs, including git, build and resources.  
 Referrals can be used for items other than code where plausible.
 
-The root folder of project is written as Pascal kebab-case.  1st level children folders of the project are 
-written as Pascal kebab-case as well.  Some folders are designated special purpose, such as below.
+The root folder of project is written as Pascal kebab-case such as `My-Awesome-Project` or just simply `Project`.
+First level children folders of the project are written as Pascal kebab-case as well.  
+Some folders are designated special purpose, such as below. 
 It is not required to create all or any of the special folders.  Not all projects will need all of them.
 
 ### Source
