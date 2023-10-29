@@ -11,8 +11,4 @@ This project is licensed under the zlib license - see the [LICENSE](LICENSE) fil
 ## Version
 The current version of this project can be seen on the [VERSION](VERSION.md) file.
 
-## Project Managers
-* Lead:		Alrick Grandison
-
-
 <br/><br/>
