@@ -1,0 +1,159 @@
+# Algodal™ Code Style
+
+This is the Algodal™ Code Style (also known as Coding Convention or Coding Guidelines) 
+used for all Algodal™ Projects.
+
+## What is Source ?
+
+The source is the content that is required to create the product from the project.  For a software project,
+this is the source files.  Within, these source files are variables, types, functions, etc.  The rule for these
+are described in detail below.  Non-Source content has rule as well and are described under _Project_.
+
+## Variables
+
+Variables are written in lower snake-case.  
+The subject *(as in, the subject of a sentence)* noun is always the first name followed by 
+other nouns, adjectives, adverbs, prepositions, conjunctions, etc.  
+The *most subject* name is always leftmost.
+
+```
+char *president;
+char *president_chile;
+char *president_chile_football;
+int power_windturbines;
+int ball_green; //ball is the subject
+int green_ball; //green is the subject
+```
+
+
+## Defines and Enum Values
+
+Defines and Enum Values are always written as upper snake-case.
+
+```
+LEN
+TEXT_LEN
+VALUE_A
+C
+```
+
+## Type
+
+Types are written as Pascal cases.  They are nouns, adjectives or adverbs but never verbs.  
+They can be typedef or not.
+
+```
+struct Car;
+enum Purple;
+typedef struct Runnable Runnable;
+```
+
+## Functions
+
+Functions are written as Pascal cases.  They are Verbs.  
+The verb may be followed by a predicate.  A function may have multiple verbs and predicates.  
+In such cases, conjunctions are used to join them.  Predicates may contain conjunctions and prepositions as well.  
+The order of the verbs describes the order in which the function executes its internal process.
+
+```
+int Get();
+int GetSome();
+int GetSomeByChoice(int);
+int Try();
+int TryAndCatch();
+int TryOrCatch();
+int CatchAndTry(); //different order
+```
+
+## Scope
+
+Scope is written as an uppercase noun followed by a single underscore.  
+There can be multiple nouns, and in such cases, Pascal Case is used.  Multiple scopes are concatenated.
+
+```
+Project_
+CarProject_
+CarProject_EngineModule_
+```
+
+## File
+
+Files are written in upper snake-case and are descriptive names of the features they implement.  
+Each file must implement no more than one feature.  That means our code will be grouped according to features. 
+
+```
+engine.c
+clock.c
+new_web_connect.c
+hungry_parse.c
+ecs.c
+screen.c
+```
+
+## Folder
+
+Folders *(more specifically, source folders)* are written in lower kebab-case and are 
+descriptive of systems **(groups of features)** they contain or implement. 
+Folders are not required - you can have all your files in the route directory.
+Non-Source folders do not follow this rule but rules are set by project.
+
+```
+visual
+sound
+controls
+server-interface
+core-framework
+```
+
+## Project
+
+The project name can be anything from some unique name created or a descriptive name.  
+A project must solve no more than one purpose.  
+If your project goal requires code that solves another purpose, 
+don’t include this code as a part of your project but instead create another project for that code base.  
+Then you can refer to that project for that code base.
+
+Each project must have its own code, tests, demos, code base, referrals to third-party/other projects code 
+and its own scripts.
+
+A project must be a root folder that contains everything it needs, including git, build and resources.  
+Referrals can be used for items other than code where plausible.
+
+The root folder of project is written as Pascal kebab-case.  1st level children folders of the project are 
+written as Pascal kebab-case as well.  Some folders are designated special purpose, such as below.
+It is not required to create all or any of the special folders.  Not all projects will need all of them.
+
+### Source
+
+`Source` folder is where the source files and source folders go.  It is the root folder of the project's source.
+
+### Scripts
+
+`Scripts` folder is where all the scripts go.
+
+### Build
+
+`Build` folder is where all the build files go.  It is usually added to .gitignore.
+
+### Data
+
+`Data` folder is where all additional resources needed by the project or product go.  Such as, 
+images, sounds, data-files (like json, xml, etc), Licenses for the product, and so on.
+
+### Document
+
+`Document` folder is where all the document generation files go.  Such as,
+doxygen and sphinx.
+
+### Design
+
+`Design` folder is where all the design, ideas and planning files for the project go.
+
+
+## Non-Source Files
+
+There is no convention for naming non-source files or the content within them.
+
+
+
+
