@@ -76,6 +76,16 @@ int CatchAndTry(); //different order
 `Callback` is a special *verb* used for writting callback functions.  Other special words can be used
 as *verbs* as well it they are well known in program-jargon.
 
+If any part of the name is an abbreviation that is normally written as all caps, it is converted to
+Pascal case.  Dashes or Underscores are collapsed.
+
+```
+int GetCmdline(); //CMD Line
+int GetUat(); //UAT
+int GetUtf8();// UTF-8
+int GetAvg(); // AVG
+```
+
 ## Scope
 
 Scope is written as an uppercase noun followed by a single underscore.  
