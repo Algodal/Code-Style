@@ -9,6 +9,11 @@ The source is the content that is required to create the product from the projec
 this is the source files.  Within, these source files are variables, types, functions, etc.  The rule for these
 are described in detail below.  Non-Source content has rule as well and are described under _Project_.
 
+## Names
+
+Everything has name: project, functions, types and variables.  Naming convention may differ for each thing.
+If names contain numbers, the number doesn't affect the naming convention as if the number wasn't there.
+
 ## Variables
 
 Variables are written in lower snake-case.  
