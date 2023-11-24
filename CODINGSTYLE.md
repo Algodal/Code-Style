@@ -265,7 +265,7 @@ i_am_a_special_label
 
 ## Indentation style
 
-For Indentation style, we use [Allman style](https://en.wikipedia.org/wiki/Indentation_style#Allman%20Style).
+For Indentation style, we use [Allman style](https://en.wikipedia.org/wiki/Indentation_style#Allman_style).
 
 
 
