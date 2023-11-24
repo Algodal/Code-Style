@@ -263,6 +263,9 @@ Use it for any type of labels (functions, variables, constants, types, etc).
 i_am_a_special_label
 ```
 
+## Indentation style
+
+For Indentation style, we use (Allman style)[https://en.wikipedia.org/wiki/Indentation_style#Allman%20Style].
 
 
 
