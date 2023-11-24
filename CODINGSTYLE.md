@@ -3,203 +3,265 @@
 This is the Algodal™ Code Style (also known as Coding Convention or Coding Guidelines) 
 used for all Algodal™ Projects.
 
-## What is Source ?
+This document assumes that the reader is knowledgeable on Programming Language jargons such as variables,
+functions, etc.  It also assumes the user understands the terms PascalCase, SnakeCase, KebabCase, UpperCase
+and LowerCase or a combination of these.
 
-The source is the content that is required to create the product from the project.  For a software project,
-this is the source files.  Within, these source files are variables, types, functions, etc.  The rule for these
-are described in detail below.  Non-Source content has rule as well and are described under _Project_.
+This document is not for everyone.  It provides a restrictive design on how to approach the whole ARCHITECTURE
+of a software project.  It MAY be implemented, at the user's discretion, in part or entirely.  For parts
+that don't apply to your projects, it MAY be ignored entirely.
 
-## Names
+The aim of this code style, is to give the user a *rigid guideline on how to structure a software project*.  This
+primarily includes, the naming of folders, files and source-code labels.  It was designed for use by
+large-scale C Libraries and C Applications projects that are built using CMAKE but may be implemented 
+for other types of project (and other build systems).
 
-Everything has name: project, functions, types and variables.  Naming convention may differ for each thing.
-If names contain numbers, the number doesn't affect the naming convention as if the number wasn't there.
+Git versioning and Github repo is expected for the projects (but users can use whatever they prefer).
 
-## Variables
+## Naming of Project Folder
 
-Variables are written in lower snake-case.  
-The subject *(as in, the subject of a sentence)* noun is always the first name followed by 
-other nouns, adjectives, adverbs, prepositions, conjunctions, etc.  
-The *most subject* name is always leftmost.
-
-```
-char *president;
-char *president_chile;
-char *president_chile_football;
-int power_windturbines;
-int ball_green; //ball is the subject
-int green_ball; //green is the subject
-```
-
-Some words that go well together can be joined as one word instead of being separated with underscores.
-It is up to the programmer's preference.  However, it is recommended, that this is used in few cases so that
-the naming of variables remain consistent throughout the code.
+The project's root folder MUST be descriptive PascalKebabCase English Phrase OR
+if the project has a unique name then it MAY be a pronoun PascalKebabCase.
 
 ```
-int bigfoot; # foot_big
+Parser-Generator
+Signal-Response-Corresponder
+Mojan-Fire
+Loader
+Helmet
 ```
 
+This is the same name the git repo is saved as.
 
-## Defines and Enum Values
-
-Defines and Enum Values are always written as upper snake-case.
-
-```
-LEN
-TEXT_LEN
-VALUE_A
-C
-```
-
-## Type
-
-Types are written as Pascal cases.  They are nouns, adjectives or adverbs but never verbs.  
-They can be typedef or not.
+For CMAKE build system, the name of the project MAY differ from the folder name to something more palettable
+like an abbreviation.  Regardless, CMAKE project names are written in UpperSnakeCase.
+The above examples may be re-written as for CMAKE:
 
 ```
-struct Car;
-enum Purple;
-typedef struct Runnable Runnable;
+project(PARGEN)
+project(SRC)
+project(LOADER)
+project(HELMET)
 ```
 
-## Functions
-
-Functions are written as Pascal cases.  They are Verbs.  
-The verb may be followed by a predicate.  A function may have multiple verbs and predicates.  
-In such cases, conjunctions are used to join them.  Predicates may contain conjunctions and prepositions as well.  
-The order of the verbs describes the order in which the function executes its internal process.
+If you choose to abbreviate the name, how you abbreviate it is your choice.  For instance, the first 2 could
+have been written as:
 
 ```
-int Get();
-int GetSome();
-int GetSomeByChoice(int);
-int Try();
-int TryAndCatch();
-int TryOrCatch();
-int CatchAndTry(); //different order
+project(PAR_GEN)
+project(SIGNAL_RESPONSE_CORR)
 ```
 
-`Callback` is a special *verb* used for writting callback functions.  Other special words can be used
-as *verbs* as well it they are well known in program-jargon.
+## CMAKE Build Setup
 
-If any part of the name is an abbreviation that is normally written as all caps, it is converted to
-Pascal case.  Dashes or Underscores are collapsed.
-
-```
-int GetCmdline(); //CMD Line
-int GetUat(); //UAT
-int GetUtf8();// UTF-8
-int GetAvg(); // AVG
-```
-
-## Scope
-
-Scope is written as an uppercase noun followed by a single underscore.  
-There can be multiple nouns, and in such cases, Pascal Case is used.  Multiple scopes are concatenated.
+DO NOT add CMAKE scripts to **CMAKE_MODULE_PATH** because it causes issues when importing CMAKE projects
+into another CMAKE project.  Usually if that is the case, you will have to ensure that each CMAKE project's
+script files have unique names but that is hard to guarantee.  Instead, include scripts by providing 
+the full path using the generated variables, such as:
 
 ```
-Project_
-CarProject_
-CarProject_EngineModule_
+include(${PARGEN_SOURCE_DIR}/Scripts/Cmake/GetSourceFiles.cmake)
 ```
 
-If the item of the scope is a Define or Enum Value, then the scope is written as all caps.
+There is NO rule on how to name CMAKE script files or functions/macros.
+The only rule is that all CMAKE variables MUST be UpperSnakeCase and its
+name starting with the CMAKE's project name, such as:
 
 ```
-PROJECT_MAX
-CARPROJECT_SIZE
-CARPROJECT_ENGINEMODULE_LENGTH
+PARGEN_SOURCE_FILES #User created
+PARGEN_BUILD_FLAG   #User created
 ```
 
-## File
-
-Files are written in lower snake-case or lower kebab-case or a combination.
-Their names descriptive of the features they implement.  
-Each file must implement no more than one feature.  That means our code will be grouped according to features.
-Also, a feature can be from very specific to very general, so the amount of files needed is user defined.
-Lower
+It is RECOMMENDED to use an abbreviation that doesn't have any separation (meaning underscores or dashes)
+as it is more aesthetic when accessing CMAKE generated variables.  CMAKE generate variables based on your
+project name you provided it, such as:
 
 ```
-engine.c
-clock.c
-new_web_connect.c
-hungry_parse.c
-ecs.c
-screen.c
+PARGEN_SOURCE_DIR
+PARGEN_BINARY_DIR
 ```
 
-## Folder
-
-Folders can be written as Pascal kebab-case, Pascal snake-case, lower kebab-case or lower snake_case or 
-a combination. Try to be consistent across your project in the exact case type use.  Mix may be necessary
-due to case of folders generated by tools. There names are 
-descriptive of systems **(groups of features)** they contain or implement or the type of data they contain
-and can be from specific to general. 
+CMAKE projects ALWAYS add **Source/** as it's include directory.
 
 ```
-visual
-sound
-controls
-server-interface
-core-framework
+include_directories(Source)
 ```
 
-## Project
+## Project Folder Contents
 
-The project name can be anything from some unique name created or a descriptive name.  
-A project must solve no more than one purpose.  
-If your project goal requires code that solves another purpose, 
-don’t include this code as a part of your project but instead create another project for that code base.  
-Then you can refer to that project for that code base.
+ALL projects MUST contain:
 
-Each project must have its own code, tests, demos, code base, referrals to third-party/other projects code 
-and its own scripts.
+* README.md
+* VERSION.md
+* LICENSE
 
-A project must be a root folder that contains everything it needs, including git, build and resources.  
-Referrals can be used for items other than code where plausible.
+C projects MUST contain:
 
-The root folder of project is written as Pascal kebab-case such as `My-Awesome-Project` or just simply `Project`.
+* Source/
 
-Files in project are designated at certain, places (as seen below) but in some cases that is not ideal.
-For example, some of your scripts may need (or you may want) to be in the root directory.  In such cases, you
-are allowed to put your files where you need them or want them.  The below is not necessarily a requirement
-but a guideline.  Your goal, however, is to keep the overall project consistent and organized.
+CMAKE projects MUST contain:
 
-Special folder names are described below.
-It is not required to create all or any of the special folders.  Not all projects will need all of them.
-Also, as stated above, it is not a requirement to put certain fails in the below exact folders.  You can put
-you files wherever you need or want them.
+* CMakeLists.txt
+* Build/
 
-### Source
+Projects MAY contain:
 
-`Source` folder is where the source files and source folders go.  It is the root folder of the project's source.
+* Scripts/
+* Data/
+* Documents/
 
-### Other-Source
+The files **README.md**, **VERSION.md** and **VERSION** store important information about your project
+and are used for github repo. **Source/** is where all the source code for your project goes (some third-party
+source code are stored in the build folder automatically by CMAKE). **CMakeLists.txt** is CMAKE config file
+and **Build/** is where everything CMAKE generates goes.  User can store other (not related to CMAKE) 
+binary files here as well.  Basically, **Build/** is considered the binary folder of the project (though
+scripts may store their outputs else where).  It is RECOMMENDED for CMAKE, to create subfolders in **Build/**
+for Debug and Release configurations. **Scripts/** is where scripts are stored.  The scripts can be from any
+framework.  CMAKE and Python scripts are expected the most.  The user MAY put scripts in the root directory
+for use-case purposes.  **Data/** is where all data (which is any file that is used directly or indirectly 
+by the project's library or application goes). **Documents/** contains informational files generated by the project,
+files containing additional information about the project and project files for asset generating softwares (**Data/**
+would contain the exported files).
 
-`Other-Source` this is where you may put source files that are a part of the project but are not necessary for its
-functions.  Examples include tests and demo sources.
+With the exception of **Source/**, there is no rules on the naming convention of the above files or files contained by
+the above folders nor their content.
 
-### Scripts
+## Source Folder
 
-`Scripts` folder is where all the scripts go.
+**Source/** MUST have sub-directories grouping the source code according to the purpose.  
+There is NO rule governing how the names of these folders are to be written.  It is RECOMMENDED though,
+that PascalCase is used for ALL sub-directories.  For the core code of the project, 
+the name of the folder is RECOMMENDED be the same name used as the CMAKE project's name but can be of
+any choosing. For IMPORTED source code, you can leave the folder names as is or rename if you prefer.
 
-### Build
+The is no rule against having source files in the root source folder.
 
-`Build` folder is where all the build files go.  It is usually added to .gitignore.
+Each sub-directory MAY have their own sub-directories based on how best to group the code.
 
-### Data
+## Core Source Code
 
-`Data` folder is where all additional resources needed by the project or product go.  Such as, 
-images, sounds, data-files (like json, xml, etc), Licenses for the product, and so on.
+The names of the source files CREATED for a project MUST be in LowerKebabCase. If you are
+using a language in which this is not possible, such as python, you MAY use LowerSnakeCase.
+The name represents a grouping of the code it contains.
+For source files that are IMPORTED in the project and is not following
+this pattern, you may leave as is or rename if you prefer (remember to update includes).
 
-### Document
+For example,  for a file structure:
 
-`Document` folder is where all the document generation files go.  Such as,
-doxygen and sphinx.
+```
+Source/
+	Math/
+		geo-calc.h
+		trig.h
+		Shape/
+			triangle.h
+	Visual/
+		visual.h
+	Algorithim/ #imported external source
+		FastMultiply.h
+		SIMD_divide.h
+```
 
-### Design
+Within each subdirectory, when including a file, it would be:
 
-`Design` folder is where all the design, ideas and planning files for the project go.
+```
+#include "geo-calc.h"
+#include "trig.h"
+```
 
+When including a file from a different subdirectory, it would be:
+
+```
+#include "Shape/triangle.h"
+#include "Visual/visual.h"
+#include "Algorithm/FastMultiply.h"
+#include "Algorithm/SIMD_divide.h"
+```
+
+## Source Variables
+
+Variables are written as CamelCase.  The first name is ALWAYS the SUBJECT. It is followed by an
+ADJECTIVE phrase.  It may have a descriptive LABEL at the end.
+
+```
+ball
+ballGreen
+ballBigGreen
+ballBigGreenQuad
+```
+
+## Source Functions
+
+Functions are written as PascalCase.  The first name is ALWAYS the VERB. It is followed by an
+PREDICATE phrase.  It may have a descriptive LABEL at the end.
+The PREDICATE phrase is the OPTIONAL subject written as variable in the same Case.
+Then followed by OPTIONAL ADVERB followed by the PREPOSITION phrase.  This part is repeated as needed.
+When naming functions, use the least descriptive name with the enough information the function
+needs to provide.
+
+```
+Get
+GetBall
+GetBallGreen
+GetBallBigGreen
+GetBallBigGreenQuad
+GetQuickly
+GetBallQuickly
+GetWithSize
+GetBallWithSize
+GetQuicklyWithSize
+GetBallQuicklyWithSize
+```
+
+## Source Types including Structs and Typedefs
+
+Types are written as PascalCase. It MUST be a NOUN.  Types are blueprints of the objects that are being created.
+
+```
+Sprite
+Enemy
+Thread
+Int
+Float
+Boy
+Girl
+```
+
+## Source Constants including Defines and Enums
+
+Contants are written as UpperSnakeCase.  It follows the pattern for the type of label 
+it represents (functions, variables, types, etc).
+
+```
+SIZE
+BALL
+GET_BALL
+SPRITE
+```
+
+## Source Namespace
+
+For each of the above, NAMESPACE can be added to avoid name-clashing.  Namespaces are prepended in the SAME case
+and separated by underscore.  The NAMESPACE is a user-specific name.  It is RECOMMENDED to use the sub-directories
+names but it can be anything.  A single NAMESPACE can have multiple names which my be joined together or
+separated by underscores.
+
+```
+math_ball
+Math_Get
+Math_Sprite
+MATH_SIZE
+```
+
+## Special Name
+
+You are required to follow the above inorder to be consistent.  However, you need to break any rules and you need
+some form of special pattern.  You MAY use LowerSnakeCase.  
+Use it for any type of labels (functions, variables, constants, types, etc).
+
+```
+i_am_a_special_label
+```
 
 
 
