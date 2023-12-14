@@ -181,6 +181,15 @@ When including a file from a different subdirectory, it would be:
 #include "Algorithm/SIMD_divide.h"
 ```
 
+#Source Files Extensions
+
+.h for Header Files (mostly for exernal (but can be for internal))
+.c for Code Files (for compilation)
+.i for Internal Files only
+
+Only create files that I am using.
+
+
 ## Source Variables
 
 Variables are written as SnakeCase.  Variables are DESCRIPTIVE English Phrases which may be a NOUN
@@ -271,5 +280,15 @@ The Code Style is meant to be a guideline and not a rigid rule that must be foll
 code appearance consistent.  There will be times, when this is not the case, such as previously written code was
 using a different (version of /) code style  or  you import code into your project that used a different code style, etc.
 **You DO NOT need to refactor your project code** to remain 100% compliant to a code style.
+
+## Note to Myself
+
+Don't overthink the naming of projects, folders, files and labels.
+The Compiler and the Linker DO NOT CARE!  The naming of things are for yourself (and others working with you)
+so use descriptive and simple names that convey the message enough and completely.
+If you write a code, put it down for several years, it should be easy to pick up and continue where you left off.
+So, the guidelines job is to make it easy, so that you don't overthink.
+
+
 
 
