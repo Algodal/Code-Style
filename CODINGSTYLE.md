@@ -1,4 +1,5 @@
 # Algodal™ Code Style
+## verion 3
 
 This is the Algodal™ Code Style (also known as Coding Convention or Coding Guidelines) 
 used for all Algodal™ Projects.
@@ -142,7 +143,8 @@ Each sub-directory MAY have their own sub-directories based on how best to group
 
 The names of the source files CREATED for a project MUST be in LowerKebabCase. If you are
 using a language in which this is not possible, such as python, you MAY use LowerSnakeCase.
-The name represents a grouping of the code it contains.
+The name represents a grouping of the code it contains. Source files name may be prepended by the
+namespace.
 For source files that are IMPORTED in the project and is not following
 this pattern, you may leave as is or rename if you prefer (remember to update includes).
 
@@ -157,6 +159,7 @@ Source/
 			triangle.h
 	Visual/
 		visual.h
+		myproject-tweeks.h
 	Algorithim/ #imported external source
 		FastMultiply.h
 		SIMD_divide.h
@@ -180,37 +183,41 @@ When including a file from a different subdirectory, it would be:
 
 ## Source Variables
 
-Variables are written as CamelCase.  The first name is ALWAYS the SUBJECT. It is followed by an
-ADJECTIVE phrase.  It may have a descriptive LABEL at the end.
+Variables are written as SnakeCase.  Variables are DESCRIPTIVE English Phrases which may be a NOUN
+or an ADJECTIVES and NOUN combination.  It always ends with a NOUN.
+The would choice for (ADJECTIVE, NOUN) is user specific.
 
 ```
 ball
-ballGreen
-ballBigGreen
-ballBigGreenQuad
+greenball //or green_ball based on user's preference
+big_greenball //or big_green_ball
+big_green_quad_ball
 ```
 
 ## Source Functions
 
-Functions are written as PascalCase.  The first name is ALWAYS the VERB. It is followed by an
-PREDICATE phrase.  It may have a descriptive LABEL at the end.
-The PREDICATE phrase is the OPTIONAL subject written as variable in the same Case.
-Then followed by OPTIONAL ADVERB followed by the PREPOSITION phrase.  This part is repeated as needed.
-When naming functions, use the least descriptive name with the enough information the function
-needs to provide.
-
+Functions are written as PascalCase.  Functions are DESCRIPTIVE English Phrases which may be a VERB 
+or ADVERBS and a VERB combination. It always ends with a VERB or PREDICATE.
+It is followed by an PREDICATE phrase.  The PREDICATE may include PREPOSITIONS.  
+The would choice for (ADVERB, VERB, PREDICATE) is user specific.
 ```
 Get
 GetBall
-GetBallGreen
-GetBallBigGreen
-GetBallBigGreenQuad
-GetQuickly
-GetBallQuickly
-GetWithSize
-GetBallWithSize
-GetQuicklyWithSize
-GetBallQuicklyWithSize
+GetGreenBall
+GetBigGreenBall
+GetBigGreenQuadBall
+QuicklyGet
+QuicklyGetBall
+GetBySize
+GetBallBySize
+QuicklyGetBySize
+QuicklyGetBallBySize
+```
+
+Some functions may have multiple purposes and the name will describe this.
+
+```
+SumValuesAndSaveAverage
 ```
 
 ## Source Types including Structs and Typedefs
@@ -253,21 +260,16 @@ Math_Sprite
 MATH_SIZE
 ```
 
-## Special Name
-
-You are required to follow the above inorder to be consistent.  However, you need to break any rules and you need
-some form of special pattern.  You MAY use LowerSnakeCase.  
-Use it for any type of labels (functions, variables, constants, types, etc).
-
-```
-i_am_a_special_label
-```
-
 ## Indentation style
 
 For Indentation style, we use [Allman style](https://en.wikipedia.org/wiki/Indentation_style#Allman_style).
 
 
+## Only a Guideline; Not a Rule
 
+The Code Style is meant to be a guideline and not a rigid rule that must be followed.  The purpose is to make your
+code appearance consistent.  There will be times, when this is not the case, such as previously written code was
+using a different (version of /) code style  or  you import code into your project that used a different code style, etc.
+**You DO NOT need to refactor your project code** to remain 100% compliant to a code style.
 
 
